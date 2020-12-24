@@ -44,7 +44,9 @@ defmodule ApiAuth.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:argon2_elixir, "~> 2.0"},
-      {:guardian, "~> 2.0.0"}
+      {:comeonin, "~> 5.3"},
+      {:guardian, "~> 2.0.0"},
+      {:tz, "~> 0.11.0"}
     ]
   end
 

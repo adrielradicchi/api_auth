@@ -5,11 +5,11 @@ database_url =
 
 # Configure your database
 config :api_auth, ApiAuth.Repo,
-  # username: "postgres",
-  # password: "postgres",
-  # database: "vote_development",
-  # hostname: "localhost",
-  url: database_url,
+  username: "postgres",
+  password: "postgres",
+  database: "vote_development",
+  hostname: "db",
+  # url: database_url,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

@@ -38,6 +38,13 @@ defmodule ApiAuthWeb.ConnCase do
       Ecto.Adapters.SQL.Sandbox.mode(ApiAuth.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    conn = Phoenix.ConnTest.build_conn()
+
+    params = %{name: "Adriel", email: "adriel@gmail.com", password: "123456"}
+    {:ok, user} = ApiAuth.create_user(params)
+    {:ok, token, _clains} = ApiAuthWeb.Auth.Guardian.encode_and_sign(user)
+
+    conn = Plug.Conn.put_req_header(conn, "authorization", "Bearer #{token}")
+    {:ok, conn: conn}
   end
 end

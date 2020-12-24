@@ -8,8 +8,9 @@ use Mix.Config
 config :api_auth, ApiAuth.Repo,
   username: "postgres",
   password: "postgres",
-  database: "vote_test#{System.get_env("MIX_TEST_PARTITION")}",
-  hostname: "localhost",
+  database: "vote_test",
+  hostname: "db",
+  show_sensitive_data_on_connection_error: true,
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,

@@ -1,9 +1,9 @@
 defmodule ApiAuth do
-  @moduledoc """
-  ApiAuth keeps the contexts that define your domain
-  and business logic.
+  alias ApiAuth.User
 
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
-  """
+  defdelegate create_user(params), to: User.Create, as: :call
+  defdelegate delete_user(params), to: User.Delete, as: :call
+  defdelegate fetch_user(params), to: User.Get, as: :call
+  defdelegate update_user(params), to: User.Update, as: :call
+
 end

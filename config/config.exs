@@ -30,12 +30,14 @@ config :phoenix, :json_library, Jason
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
 
-config :api_auth, ApiAuth.Auth.Guardian,
+config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
+
+config :api_auth, ApiAuthWeb.Auth.Guardian,
   issuer: "api_auth",
   secret_key: "2QT+CMejyvnFyRPWr7OYHyRciG42ePD3ZIUIip4FqnY3dyKaXJpKfLH4JcErwRDW"
 
-config :api_auth, ApiAuth.Auth.Pipeline,
-  module: ApiAuth.Auth.Guardian,
-  error_handler: ApiAuth.Auth.ErrorHandler,
+config :api_auth, ApiAuthWeb.Auth.Pipeline,
+  module: ApiAuthWeb.Auth.Guardian,
+  error_handler: ApiAuthWeb.Auth.ErrorHandler,
   token_type: ["access","refresh"],
   ttl: {1, :day}
