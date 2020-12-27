@@ -1,8 +1,8 @@
 defmodule ApiAuthWeb.Auth.Guardian do
   use Guardian, otp_app: :api_auth
 
-
   alias ApiAuth.{Repo, User}
+
   def subject_for_token(user, _claims) do
     sub = to_string(user.id)
     {:ok, sub}
@@ -38,4 +38,18 @@ defmodule ApiAuthWeb.Auth.Guardian do
   end
 
   defp create_token(is_valid_password, _user) when is_valid_password == false, do: {:error, %{message: "User unauthorized", status: 401}}
+
+  def generate_token() do
+    DateTime.now!("Etc/UTC")
+    |> calculate_token()
+    |> Argon2.add_hash()
+    |> get_randow_token()
+  end
+
+  defp calculate_token(date_time) do
+    ((date_time.day + date_time.month + date_time.year) * (date_time.hour * date_time.minute * date_time.second))
+    |> Integer.to_string()
+  end
+
+  defp get_randow_token(%{password_hash: token}), do: token
 end

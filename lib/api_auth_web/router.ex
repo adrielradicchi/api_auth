@@ -13,12 +13,14 @@ defmodule ApiAuthWeb.Router do
     pipe_through [:api, :auth]
 
     resources "/users", UsersController, only: [:show, :delete, :update]
+    post "/users/signout", UsersController, :sign_out
   end
 
   scope "/api", ApiAuthWeb do
     pipe_through :api
 
     post "/users", UsersController, :create
+    get "/generatetoken", GenerateTokenController, :show
     post "/users/signin", UsersController, :sign_in
   end
 

@@ -21,12 +21,11 @@ defmodule ApiAuthWeb.UsersController do
     end
   end
 
-  # def sign_out(conn, params) do
-  #   with
-  # end
-
-  def generate_token_without_login(conn, _params) do
+  def sign_out(conn, _params) do
     conn
+    |> Guardian.Plug.sign_out()
+    |> put_status(:no_content)
+    |> text("")
   end
 
   def delete(conn, %{"id" => id}) do
